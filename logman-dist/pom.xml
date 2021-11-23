@@ -8,20 +8,108 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
     <artifactId>logman-dist</artifactId>
-    <version>1.0.0</version>
+    <version>${project.version}</version>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.workhub</groupId>-->
-<!--            <artifactId>logman-model</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.workhub</groupId>-->
-<!--            <artifactId>logman-core</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.workhub</groupId>
+            <artifactId>logman-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.workhub</groupId>
+            <artifactId>logman-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
+    <build>
+        <finalName>${distr.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+<!--            just in case we want to switch to war         -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+<!--            instead of tomcat     -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.14.v20181114</version>
+                <configuration>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <detail>true</detail>
+                    <reload>auto</reload>
+                    <useTestScope>true</useTestScope>
+                    <useClasspath>true</useClasspath>
+                    <useTestClasspath>true</useTestClasspath>
+                    <httpCoonnector>
+                        <port>9090</port>
+                    </httpCoonnector>
+                    <webAppConfig>
+                        <jettyEnvXml>${basedir}/src/test/resources/jetty-env.xml</jettyEnvXml>
+                        <contextPath>/logman</contextPath>
+                    </webAppConfig>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.hibernate.javax.persistence</groupId>
+                        <artifactId>hibernate-jpa-2.1-api</artifactId>
+                        <version>1.0.2.Final</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.atomikos</groupId>
+                        <artifactId>transactions-jta</artifactId>
+                        <version>3.8.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.atomikos</groupId>
+                        <artifactId>transactions-jdbc</artifactId>
+                        <version>3.8.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-dbcp2</artifactId>
+                        <version>2.0.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.2.14</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
