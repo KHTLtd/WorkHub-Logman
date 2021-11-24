@@ -1,6 +1,7 @@
 package com.workhub.logman.kafka.config;
 
 import com.workhub.logman.data.LogData;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ public class KafkaConfig {
     }
 
     @Bean(name = "kafkaLogProducer")
-    ProducerFactory<String, LogData> getKafkaLogProducer(KafkaProperties properties) {
+    ProducerFactory<String, String> getKafkaLogProducer(KafkaProperties properties) {
         return new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
     }
 

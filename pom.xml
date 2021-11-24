@@ -13,7 +13,7 @@
 
     <groupId>com.workhub</groupId>
     <artifactId>logman</artifactId>
-    <version>${project.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Logman</name>
     <description>Log manager system for workhub</description>
 

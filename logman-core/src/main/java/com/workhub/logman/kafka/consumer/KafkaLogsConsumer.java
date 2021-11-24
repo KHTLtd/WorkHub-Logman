@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @Data
-@PropertySource("kafka-properties.yml")
+@PropertySource("classpath:kafka-properties.yml")
 public class KafkaLogsConsumer {
     List<LogData> vlist = new ArrayList<>();
     List<String> klist = new ArrayList<>();
