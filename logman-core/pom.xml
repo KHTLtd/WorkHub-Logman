@@ -12,13 +12,13 @@
     <packaging>jar</packaging>
 
     <artifactId>logman-core</artifactId>
-    <version>${project.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
             <groupId>com.workhub</groupId>
             <artifactId>logman-model</artifactId>
-            <version>${project.version}</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
