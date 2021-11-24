@@ -1,0 +1,31 @@
+server:
+  port: 5005
+
+spring:
+
+  #KAFKA
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      groupId: workhub.dev.test.logman.log
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer #com.workhub.lorman.kafka.serialization.LogDataDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer #com.workhub.lorman.kafka.serialization.LogDataDeserializer
+
+# Actuator Admin Dashboard
+  boot:
+    admin:
+      client:
+        url: http://localhost:5005/admin
+      context-path: /admin
+
+# Actuator Expose Endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

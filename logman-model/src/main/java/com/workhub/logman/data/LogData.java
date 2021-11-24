@@ -1,9 +1,14 @@
 package com.workhub.logman.data;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.workhub.logman.data.deserialization.LocalDateTimeDeserializer;
+import json.UtilJson;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.UUID;
 
 /**
  * Log data transfer class
@@ -14,9 +19,12 @@ import java.time.LocalDateTime;
 
 @Data
 public class LogData implements Serializable {
+    private UUID logId;
+
     /* LogMan specific data */
 
     /* Time of the log insertion into the db */
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime insertStamp;
     /* LogMan host name */
     private String lmHost;
@@ -34,9 +42,31 @@ public class LogData implements Serializable {
     /* Subsystems url address */
     private String subAddress;
     /* Time the log was produced on the subsystem */
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createStamp;
 
     private String ex;
     private String message;
 
+    @Override
+    public String toString() {
+        return
+                "{" +
+                "\"logId\":\"" + logId + '\"' +
+                ", \"insertStamp\":\"" + insertStamp + '\"' +
+                ", \"lmHost\":\"" + lmHost + '\"' +
+                ", \"lmAddress\":\"" + lmAddress + '\"' +
+                ", \"logger\":\"" + logger + '\"' +
+                ", \"subsystem\":\"" + subsystem + '\"' +
+                ", \"subHost\":\"" + subHost + '\"' +
+                ", \"subAddress\":\"" + subAddress + '\"' +
+                ", \"createStamp\":\"" + createStamp + '\"' +
+                ", \"ex\":\"" + ex + '\"' +
+                ", \"message\":\"" + message + '\"' +
+                '}';
+    }
+
+    public String toJsonString() {
+        return UtilJson.generateJsonObjectStringForClass(this);
+    }
 }
