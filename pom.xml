@@ -52,8 +52,7 @@
     </properties>
 
     <scm>
-        <!-- TODO: JUST A PLACEHOLDER. CORRECT TO CORRECT SCM LINK LATER -->
-        <developerConnection>scm:git:ssh://git@github.com/workhub/logman.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com:KHTLtd/WorkHub-Logman.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
