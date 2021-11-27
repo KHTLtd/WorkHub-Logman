@@ -19,7 +19,7 @@ public class KafkaConfig {
     }
 
     @Bean(name = "kafkaLogProducer")
-    ProducerFactory<String, LogData> getKafkaLogProducer(KafkaProperties properties) {
+    ProducerFactory<String, String> getKafkaLogProducer(KafkaProperties properties) {
         return new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
     }
 

@@ -13,7 +13,7 @@
 
     <groupId>com.workhub</groupId>
     <artifactId>logman</artifactId>
-    <version>${project.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Logman</name>
     <description>Log manager system for workhub</description>
 
@@ -52,8 +52,7 @@
     </properties>
 
     <scm>
-        <!-- TODO: JUST A PLACEHOLDER. CORRECT TO CORRECT SCM LINK LATER -->
-        <developerConnection>scm:git:ssh://git@github.com/workhub/logman.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com:KHTLtd/WorkHub-Logman.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
