@@ -1,13 +1,42 @@
 package com.workhub.logman.persistence.service.impl;
 
+import com.workhub.logman.dao.ILogDataDao;
+import com.workhub.logman.data.LogData;
 import com.workhub.logman.persistence.service.IPersistenceService;
+import lombok.extern.java.Log;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
+@Component
 public class PersistenceServiceImpl implements IPersistenceService {
-    @Override
-    public void saveLog() {
 
+    private final int batchSize;
+
+    private final Queue<LogData> queue;
+
+    @Autowired
+    ILogDataDao dao;
+
+    public PersistenceServiceImpl() {
+        queue = new PriorityQueue<LogData>();
+        batchSize = 2;
+    }
+
+    @Override
+    public void saveLog(LogData log) throws Exception {
+        queue.add(log);
+        if (queue.size() < batchSize) {
+            return;
+        }
+        flush();
     }
 
     @Override
@@ -23,5 +52,10 @@ public class PersistenceServiceImpl implements IPersistenceService {
     @Override
     public Object getLogList() {
         return null;
+    }
+
+    private void flush() throws Exception {
+        List<LogData> list = new ArrayList<>(queue);
+        dao.saveLogs(list);
     }
 }

@@ -4,8 +4,6 @@ import com.workhub.logman.routing.RoutingDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
-
 /**
  * DataSource Beans config
  *
@@ -15,7 +13,7 @@ import javax.sql.DataSource;
 public class DataSourcesConfig {
 
     @Bean("logmanDs")
-    DataSource logmanDs() {
+    RoutingDataSource logmanDs() {
         return new RoutingDataSource();
     }
 

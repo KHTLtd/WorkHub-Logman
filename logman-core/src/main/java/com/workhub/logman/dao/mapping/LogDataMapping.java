@@ -1,6 +1,7 @@
 package com.workhub.logman.dao.mapping;
 
 import com.workhub.logman.data.LogData;
+import com.workhub.logman.data.constants.SchemaName;
 import de.bytefish.pgbulkinsert.mapping.AbstractMapping;
 
 /**
@@ -11,8 +12,8 @@ import de.bytefish.pgbulkinsert.mapping.AbstractMapping;
  */
 public class LogDataMapping extends AbstractMapping<LogData> {
 
-    protected LogDataMapping(String schemaName, String tableName) {
-        super(schemaName, tableName);
+    public LogDataMapping(SchemaName schema) {
+        super(schema.toString(), "log");
 
         //Strings
         mapText("lmHost", LogData::getLmHost);

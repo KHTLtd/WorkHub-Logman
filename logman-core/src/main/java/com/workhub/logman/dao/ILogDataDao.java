@@ -2,6 +2,7 @@ package com.workhub.logman.dao;
 
 import com.workhub.logman.data.LogData;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -17,15 +18,15 @@ public interface ILogDataDao {
      *
      * @param logList list of incoming logs to be inserted in db
      */
-    void saveLogs(List<LogData> logList);
+    void saveLogs(List<LogData> logList) throws SQLException;
 
-    /**
-     * Get partitions to be removed
-     * base on the number of days
-     *
-     * @param days number of days to select a partition by
-     */
-    void getPartitionsToRemove(int days);
+//    /**
+//     * Get partitions to be removed
+//     * base on the number of days
+//     *
+//     * @param days number of days to select a partition by
+//     */
+//    void getPartitionsToRemove(int days);
 
     /**
      * Remove partitions from a certain DB
@@ -33,7 +34,7 @@ public interface ILogDataDao {
      * @param days number of days after which partition will be removed
      * @param dsKey key to the DataSource to delete from
      */
-    void removePartitions(int days, String dsKey);
+    void removePartitions(int days, String dsKey) throws Exception;
 
     // TODO: Later. For data collecting
     List<LogData> findByTraceId();

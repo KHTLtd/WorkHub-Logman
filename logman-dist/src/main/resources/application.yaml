@@ -16,6 +16,26 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer #com.workhub.lorman.kafka.serialization.LogDataDeserializer
 
+#  datasource:
+#    jndi-name: jdbc/logman-shard-0
+#    url: jdbc:postgresql://localhost:8787/logman
+#    username: Logman
+#    password: LogmanLogmanLogman123
+#    driver-class-name: org.postgresql.Driver
+#  datasource:
+#    jndi-name: jdbc/logman-shard-1
+#    url: jdbc:postgresql://localhost:8787/logman
+#    username: Logman
+#    password: LogmanLogmanLogman123
+#    driver-class-name: org.postgresql.Driver
+#  datasource:
+#    jndi-name: jdbc/logman-shard-2
+#    url: jdbc:postgresql://localhost:8787/logman
+#    username: Logman
+#    password: LogmanLogmanLogman123
+#    driver-class-name: org.postgresql.Driver
+
+
 # Actuator Admin Dashboard
   boot:
     admin:

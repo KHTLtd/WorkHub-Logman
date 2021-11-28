@@ -1,9 +1,83 @@
-<?xml version="1.0"  encoding="ISO-8859-1"?>
+<?xml version="1.0" ?>
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN"
         "http://www.eclipse.org/jetty/configure.dtd">
 
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
 
+    <!-- V TRANSACTION MANAGERS V -->
+    <New id="txMng" class="com.atomikos.icatch.jta.UserTransactionManager">
+        <Call name="init"/>
+    </New>
+    <New id="tx" class="org.eclipse.jetty.plus.jndi.Transaction">
+        <Arg>
+            <Ref refid="txMng"/>
+        </Arg>
+    </New>
 
+    <New id="userTransaction" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>
+            java:comp/TransacttionManager
+        </Arg>
+        <Arg>
+            <Ref refid="txMng" />
+        </Arg>
+    </New>
+
+    <New id="UserTransaction" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>
+            java:comp/UserTransaction
+        </Arg>
+        <Arg>
+            <New class="com.atomikos.icatch.jta.UserTransactionImp"/>
+        </Arg>
+    </New>
+
+    <!-- V DATA SOURCES V -->
+    <New id="logmanDs0" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg/>
+        <Arg>jdbc/logman-shard-0</Arg>
+        <Arg>
+            <New class="org.apache.commons.dbcp2.BasicDataSource">
+                <Set name="driverClassName">org.postgresql.Driver</Set>
+                <Set name="url">jdbc:postgresql://localhost:8787/logman</Set>
+                <Set name="username">Logman</Set>
+                <Set name="password">LogmanLogmanLogman123</Set>
+                <Set name="maxConnLifetimeMillis">10000</Set>
+                <Set name="maxWaitMillis">10000</Set>
+            </New>
+        </Arg>
+    </New>
+
+    <New id="logmanDs1" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg/>
+        <Arg>jdbc/logman-shard-1</Arg>
+        <Arg>
+            <New class="org.apache.commons.dbcp2.BasicDataSource">
+                <Set name="driverClassName">org.postgresql.Driver</Set>
+                <Set name="url">jdbc:postgresql://localhost:8787/logman</Set>
+                <Set name="username">Logman</Set>
+                <Set name="password">LogmanLogmanLogman123</Set>
+                <Set name="maxConnLifetimeMillis">10000</Set>
+                <Set name="maxWaitMillis">10000</Set>
+            </New>
+        </Arg>
+    </New>
+
+    <New id="logmanDs2" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg/>
+        <Arg>jdbc/logman-shard-2</Arg>
+        <Arg>
+            <New class="org.apache.commons.dbcp2.BasicDataSource">
+                <Set name="driverClassName">org.postgresql.Driver</Set>
+                <Set name="url">jdbc:postgresql://localhost:8787/logman</Set>
+                <Set name="username">Logman</Set>
+                <Set name="password">LogmanLogmanLogman123</Set>
+                <Set name="maxConnLifetimeMillis">10000</Set>
+                <Set name="maxWaitMillis">10000</Set>
+            </New>
+        </Arg>
+    </New>
+
+    <!-- V WORK MANAGERS V -->
 
 </Configure>
