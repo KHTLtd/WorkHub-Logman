@@ -5,32 +5,32 @@
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
 
     <!-- V TRANSACTION MANAGERS V -->
-    <New id="txMng" class="com.atomikos.icatch.jta.UserTransactionManager">
-        <Call name="init"/>
-    </New>
-    <New id="tx" class="org.eclipse.jetty.plus.jndi.Transaction">
-        <Arg>
-            <Ref refid="txMng"/>
-        </Arg>
-    </New>
+<!--    <New id="txMng" class="com.atomikos.icatch.jta.UserTransactionManager">-->
+<!--        <Call name="init"/>-->
+<!--    </New>-->
+<!--    <New id="tx" class="org.eclipse.jetty.plus.jndi.Transaction">-->
+<!--        <Arg>-->
+<!--            <Ref refid="txMng"/>-->
+<!--        </Arg>-->
+<!--    </New>-->
 
-    <New id="userTransaction" class="org.eclipse.jetty.plus.jndi.Resource">
-        <Arg>
-            java:comp/TransacttionManager
-        </Arg>
-        <Arg>
-            <Ref refid="txMng" />
-        </Arg>
-    </New>
+<!--    <New id="userTransaction" class="org.eclipse.jetty.plus.jndi.Resource">-->
+<!--        <Arg>-->
+<!--            java:comp/TransacttionManager-->
+<!--        </Arg>-->
+<!--        <Arg>-->
+<!--            <Ref refid="txMng" />-->
+<!--        </Arg>-->
+<!--    </New>-->
 
-    <New id="UserTransaction" class="org.eclipse.jetty.plus.jndi.Resource">
-        <Arg>
-            java:comp/UserTransaction
-        </Arg>
-        <Arg>
-            <New class="com.atomikos.icatch.jta.UserTransactionImp"/>
-        </Arg>
-    </New>
+<!--    <New id="UserTransaction" class="org.eclipse.jetty.plus.jndi.Resource">-->
+<!--        <Arg>-->
+<!--            java:comp/UserTransaction-->
+<!--        </Arg>-->
+<!--        <Arg>-->
+<!--            <New class="com.atomikos.icatch.jta.UserTransactionImp"/>-->
+<!--        </Arg>-->
+<!--    </New>-->
 
     <!-- V DATA SOURCES V -->
     <New id="logmanDs0" class="org.eclipse.jetty.plus.jndi.Resource">

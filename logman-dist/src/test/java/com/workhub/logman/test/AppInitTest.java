@@ -13,7 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-class LogmanApplicationTests {
+class AppInitTest {
 
 	@Test
 	public void init() throws NamingException {
@@ -21,19 +21,16 @@ class LogmanApplicationTests {
 			.setType(EmbeddedDatabaseType.H2)
 			.setName("testDb0;MODE=PostgreSQL")
 			.addScript("classpath:sql/createDatabase.sql")
-//			.addScript("populateDatabase.sql")
 		).build();
 		final DataSource logDs1 = (new EmbeddedDatabaseBuilder()
 			.setType(EmbeddedDatabaseType.H2)
 			.setName("testDb1;MODE=PostgreSQL")
 			.addScript("classpath:sql/createDatabase.sql")
-//			.addScript("populateDatabase.sql")
 		).build();
 		final DataSource logDs2 = (new EmbeddedDatabaseBuilder()
 			.setType(EmbeddedDatabaseType.H2)
 			.setName("testDb2;MODE=PostgreSQL")
 			.addScript("classpath:sql/createDatabase.sql")
-//			.addScript("classpath:sql/populateDatabase.sql")
 		).build();
 
 		final Properties jndi = new Properties();

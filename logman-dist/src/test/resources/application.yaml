@@ -10,11 +10,11 @@ spring:
       groupId: workhub.dev.test.logman.log
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer #com.workhub.lorman.kafka.serialization.LogDataDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
       bootstrap-servers: localhost:9092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer #com.workhub.lorman.kafka.serialization.LogDataDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 
 # Actuator Admin Dashboard

@@ -13,15 +13,15 @@ import workhub.commons.concurrency.executors.BlockingTaskExecutor;
 @Configuration
 public class TaskExecutorConfig {
 
-    private final String JNDI_EXECUTOR_PARTITIONS_DELETION = "jboss/ee/concurrency/executor/partitionsTaskExecutor";
-
-    @Bean
-    public DefaultManagedTaskExecutor partitionsTaskExecutor() {
-        // TODO: change to Blocking strategy executor. cuz this one wont work, prbbly
-        DefaultManagedTaskExecutor defaultManagedTaskExecutor = new BlockingTaskExecutor();
-        defaultManagedTaskExecutor.setResourceRef(true);
-        defaultManagedTaskExecutor.setJndiName(JNDI_EXECUTOR_PARTITIONS_DELETION);
-        return defaultManagedTaskExecutor;
-    }
+//    private final String JNDI_EXECUTOR_PARTITIONS_DELETION = "jboss/ee/concurrency/executor/partitionsTaskExecutor";
+//
+//    @Bean
+//    public DefaultManagedTaskExecutor partitionsTaskExecutor() {
+//        // TODO: change to Blocking strategy executor. cuz this one wont work, prbbly
+//        DefaultManagedTaskExecutor defaultManagedTaskExecutor = new BlockingTaskExecutor();
+//        defaultManagedTaskExecutor.setResourceRef(true);
+//        defaultManagedTaskExecutor.setJndiName(JNDI_EXECUTOR_PARTITIONS_DELETION);
+//        return defaultManagedTaskExecutor;
+//    }
 
 }

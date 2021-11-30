@@ -1,4 +1,4 @@
-package com.workhub.logman.kafka.config;
+package spring.config.kafka;
 
 import com.workhub.logman.data.LogData;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -14,17 +14,17 @@ import org.springframework.kafka.core.ProducerFactory;
 public class KafkaConfig {
 
     @Bean(name = "kafkaLogTemplate")
-    KafkaTemplate<String, String> getKafkaLogTemplate(ProducerFactory<String, String> factory) {
+    KafkaTemplate<String, String> kafkaLogTemplate(ProducerFactory<String, String> factory) {
         return new KafkaTemplate<>(factory);
     }
 
     @Bean(name = "kafkaLogProducer")
-    ProducerFactory<String, String> getKafkaLogProducer(KafkaProperties properties) {
+    ProducerFactory<String, String> kafkaLogProducer(KafkaProperties properties) {
         return new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
     }
 
     @Bean(name = "kafkaLogConsumer")
-    ConsumerFactory<String, LogData> getKafkaLogConsumer(KafkaProperties properties) {
+    ConsumerFactory<String, LogData> kafkaLogConsumer(KafkaProperties properties) {
         return new DefaultKafkaConsumerFactory<>(properties.buildConsumerProperties());
     }
 

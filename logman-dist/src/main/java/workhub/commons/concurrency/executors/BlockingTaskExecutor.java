@@ -1,6 +1,6 @@
 package workhub.commons.concurrency.executors;
 
-import io.micrometer.core.lang.NonNullApi;
+//import io.micrometer.core.lang.NonNullApi;
 import lombok.SneakyThrows;
 import org.springframework.core.task.TaskRejectedException;
 import org.springframework.scheduling.concurrent.DefaultManagedTaskExecutor;
@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
  * @author alexkirillov
  * @since 1.0.0 | 24.11.2021
  */
-@NonNullApi
+//@NonNullApi
 @SuppressWarnings("BusyWait")
 public class BlockingTaskExecutor extends DefaultManagedTaskExecutor {
 

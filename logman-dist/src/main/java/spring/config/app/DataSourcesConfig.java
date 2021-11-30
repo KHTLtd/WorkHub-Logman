@@ -1,6 +1,6 @@
 package spring.config.app;
 
-import com.workhub.logman.routing.RoutingDataSource;
+//import com.workhub.logman.routing.RoutingDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DataSourcesConfig {
 
-    @Bean("logmanDs")
-    RoutingDataSource logmanDs() {
-        return new RoutingDataSource();
-    }
+//    @Bean("logmanDs")
+//    RoutingDataSource logmanDs() {
+//        return new RoutingDataSource();
+//    }
 
 }
