@@ -26,7 +26,7 @@ public class PersistenceServiceImpl implements IPersistenceService {
     ILogDataDao dao;
 
     public PersistenceServiceImpl() {
-        queue = new PriorityQueue<LogData>();
+        queue = new PriorityQueue<>();
         batchSize = 2;
     }
 

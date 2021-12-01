@@ -17,7 +17,6 @@ import java.util.UUID;
 @RestController
 public class LogController {
     @Autowired
-    @Qualifier("kafkaLogTemplate")
     private KafkaTemplate<String, String> kafkaTemplate;
     @Autowired
     private KafkaLogsConsumer consumer;
