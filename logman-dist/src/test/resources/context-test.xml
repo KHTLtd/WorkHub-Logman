@@ -1,0 +1,45 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--       xmlns:jee="http://www.springframework.org/schema/jee" xsi:schemaLocation="-->
+<!--        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd-->
+<!--        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">-->
+
+
+
+<!--    &lt;!&ndash; POSTGRE H2 &ndash;&gt;-->
+<!--    <bean id="logDb0"-->
+<!--          class="org.apache.commons.dbcp2.BasicDataSource"-->
+<!--          destroy-method="close">-->
+<!--          <property name="driverClassName" value="org.postgresql.Driver"/>-->
+<!--          <property name="url" value="jdbc:postgresql://localhost:8787/logman"/>-->
+<!--          <property name="username" value="Logman"/>-->
+<!--          <property name="password" value="LogmanLogmanLogman123"/>-->
+<!--          <property name="maxWaitMillis" value="10000"/>-->
+<!--          <property name="maxConnLifetimeMillis" value="10000"/>-->
+<!--    </bean>-->
+<!--    <bean id="logDb1"-->
+<!--          class="org.apache.commons.dbcp2.BasicDataSource"-->
+<!--          destroy-method="close">-->
+<!--        <property name="driverClassName" value="org.postgresql.Driver"/>-->
+<!--        <property name="url" value="jdbc:postgresql://localhost:8787/logman"/>-->
+<!--        <property name="username" value="Logman"/>-->
+<!--        <property name="password" value="LogmanLogmanLogman123"/>-->
+<!--        <property name="maxWaitMillis" value="10000"/>-->
+<!--        <property name="maxConnLifetimeMillis" value="10000"/>-->
+<!--    </bean><bean id="logDb2"-->
+<!--                 class="org.apache.commons.dbcp2.BasicDataSource"-->
+<!--                 destroy-method="close">-->
+<!--    <property name="driverClassName" value="org.postgresql.Driver"/>-->
+<!--    <property name="url" value="jdbc:postgresql://localhost:8787/logman"/>-->
+<!--    <property name="username" value="Logman"/>-->
+<!--    <property name="password" value="LogmanLogmanLogman123"/>-->
+<!--    <property name="maxWaitMillis" value="10000"/>-->
+<!--    <property name="maxConnLifetimeMillis" value="10000"/>-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash; JNDIS &ndash;&gt;-->
+<!--    <jee:jndi-lookup id="logDb0" jndi-name="jdbc/logman-shard-0" resource-ref="true"/>-->
+<!--    <jee:jndi-lookup id="logDb1" jndi-name="jdbc/logman-shard-0" resource-ref="true"/>-->
+<!--    <jee:jndi-lookup id="logDb2" jndi-name="jdbc/logman-shard-0" resource-ref="true"/>-->
+<!--</beans>-->

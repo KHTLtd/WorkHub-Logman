@@ -12,7 +12,6 @@
     <packaging>jar</packaging>
 
     <artifactId>logman-model</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
 
     <!-- There are only data models here. Any dependency should be utterly necessary if to be added -->
     <dependencies>

@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 
 @Data
-public class LogData implements Serializable {
+public class LogData implements Serializable, Comparable<LogData> {
     private UUID logId;
 
     /* LogMan specific data */
@@ -69,4 +69,12 @@ public class LogData implements Serializable {
     public String toJsonString() {
         return UtilJson.generateJsonObjectStringForClass(this);
     }
+
+    @Override
+    public int compareTo(LogData other) {
+        LocalDateTime thisTime = this.getCreateStamp();
+        LocalDateTime otherTime = other.getCreateStamp();
+        return thisTime.compareTo(otherTime);
+    }
+
 }

@@ -1,5 +1,0 @@
-logman:
-  kafka:
-    listener:
-      topic:
-        pattern: "workhub.*.logman.log"
