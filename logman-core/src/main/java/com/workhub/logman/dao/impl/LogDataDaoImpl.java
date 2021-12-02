@@ -4,7 +4,7 @@ import com.workhub.logman.dao.ILogDataDao;
 import com.workhub.logman.dao.mapping.LogDataMapping;
 import com.workhub.logman.data.constants.SchemaName;
 import com.workhub.logman.exceptions.PersistenceServiceException;
-//import com.workhub.logman.routing.RoutingDataSource;
+import com.workhub.logman.routing.RoutingDataSource;
 import com.workhub.logman.data.LogData;
 import de.bytefish.pgbulkinsert.PgBulkInsert;
 import de.bytefish.pgbulkinsert.util.StringUtils;
@@ -29,56 +29,56 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class LogDataDaoImpl implements ILogDataDao {
 
-//    @Autowired
-//    @Qualifier("logmanDs")
-//    private RoutingDataSource dataSource;
+    @Autowired
+    @Qualifier("logmanDs")
+    private RoutingDataSource dataSource;
 
     @Override
     public void saveLogs(List<LogData> logs) throws SQLException {
-//        if (logs.isEmpty()) {
-//            return;
-//        }
-//        Connection connection = DataSourceUtils.getConnection(dataSource);
-//        try {
-//            log.debug("Obtained connection: {}", connection);
-//            PgBulkInsert<LogData> bulkInsert = new PgBulkInsert<>(new LogDataMapping(SchemaName.LOG));
-//            final PGConnection pgConnection = connection.unwrap(PGConnection.class);
-//            bulkInsert.saveAll(pgConnection, logs.stream());
-//        } catch (Exception e) {
-//            log.error("Failed to write data to Database. Reason: " + e.getMessage(), e);
-//            throw e;
-//        } finally {
-//            DataSourceUtils.releaseConnection(connection, this.dataSource);
-//        }
-//        log.debug("Successfully inserted {} entries", logs.size());
+        if (logs.isEmpty()) {
+            return;
+        }
+        Connection connection = DataSourceUtils.getConnection(dataSource);
+        try {
+            log.debug("Obtained connection: {}", connection);
+            PgBulkInsert<LogData> bulkInsert = new PgBulkInsert<>(new LogDataMapping(SchemaName.LOG));
+            final PGConnection pgConnection = connection.unwrap(PGConnection.class);
+            bulkInsert.saveAll(pgConnection, logs.stream());
+        } catch (Exception e) {
+            log.error("Failed to write data to Database. Reason: " + e.getMessage(), e);
+            throw e;
+        } finally {
+            DataSourceUtils.releaseConnection(connection, this.dataSource);
+        }
+        log.debug("Successfully inserted {} entries", logs.size());
     }
 
     @Override
     public void removePartitions(int days, String dsKey) throws Exception {
-//        DataSource ds;
-//        if (!StringUtils.isNullOrWhiteSpace(dsKey)) {
-//            log.debug("Received a DB key to remove partitions. Key: {}", dsKey);
-//            ds = dataSource.getInitialisedDataSource(dsKey);
-//        } else {
-//            log.debug("No Key for partitions removal was received. Removing from current in-use DB.");
-//            ds = dataSource;
-//        }
-//        JdbcOperations template = new JdbcTemplate(ds);
-//        List<String> partitionsToRemove = new ArrayList<>();
-//        try {
-//            partitionsToRemove = getPartitionsToRemove(days, template);
-//        } catch (PersistenceServiceException e) {
-//            log.error("Caught exception while seraching for partitions to remove: "
-//                    + e.getMessage(), e);
-//        }
-//        for (String partition : partitionsToRemove) {
-//            try {
-//                this.removeSinglePartition(partition, template);
-//            } catch (PersistenceServiceException e) {
-//                log.error("Caught exception while removing partitions: "
-//                        + e.getMessage(), e);
-//            }
-//        }
+        DataSource ds;
+        if (!StringUtils.isNullOrWhiteSpace(dsKey)) {
+            log.debug("Received a DB key to remove partitions. Key: {}", dsKey);
+            ds = dataSource.getInitialisedDataSource(dsKey);
+        } else {
+            log.debug("No Key for partitions removal was received. Removing from current in-use DB.");
+            ds = dataSource;
+        }
+        JdbcOperations template = new JdbcTemplate(ds);
+        List<String> partitionsToRemove = new ArrayList<>();
+        try {
+            partitionsToRemove = getPartitionsToRemove(days, template);
+        } catch (PersistenceServiceException e) {
+            log.error("Caught exception while seraching for partitions to remove: "
+                    + e.getMessage(), e);
+        }
+        for (String partition : partitionsToRemove) {
+            try {
+                this.removeSinglePartition(partition, template);
+            } catch (PersistenceServiceException e) {
+                log.error("Caught exception while removing partitions: "
+                        + e.getMessage(), e);
+            }
+        }
     }
 
 

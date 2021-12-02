@@ -1,6 +1,3 @@
-server:
-  port: 8080
-
 spring:
 
   #KAFKA
@@ -25,8 +22,8 @@ spring:
 #      context-path: /admin
 
 # Actuator Expose Endpoints
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"

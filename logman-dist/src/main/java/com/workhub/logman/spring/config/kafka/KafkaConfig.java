@@ -1,5 +1,6 @@
-package spring.config.kafka;
+package com.workhub.logman.spring.config.kafka;
 
+import com.workhub.logman.kafka.consumer.KafkaLogsConsumer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,11 @@ import org.springframework.kafka.core.ProducerFactory;
 
 @Configuration
 public class KafkaConfig {
+
+    @Bean
+    KafkaLogsConsumer kafkaLogsConsumer() {
+        return new KafkaLogsConsumer();
+    }
 
     @Bean
     KafkaTemplate<String, String> kafkaLogTemplate(ProducerFactory<String, String> factory) {

@@ -1,12 +1,11 @@
-package spring.config.app;
+package com.workhub.logman.spring.config.app;
 
 import com.workhub.logman.dao.ILogDataDao;
 import com.workhub.logman.dao.impl.LogDataDaoImpl;
-import spring.config.kafka.KafkaConfig;
+import com.workhub.logman.spring.config.kafka.KafkaConfig;
 import com.workhub.logman.persistence.service.IPersistenceService;
 import com.workhub.logman.persistence.service.impl.PersistenceServiceImpl;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Import;
  *
  * @since 1.0.0 | 24.11.2021
  */
-@Configuration
 @Import({KafkaConfig.class})
 public class BeansConfig {
 

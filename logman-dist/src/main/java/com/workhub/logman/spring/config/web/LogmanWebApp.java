@@ -1,10 +1,10 @@
-//package spring.config.web;
+//package com.workhub.logman.config.web;
 //
 //import com.workhub.logman.web.servlet.InfoServlet;
 //import org.springframework.web.context.WebApplicationContext;
 //import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 //import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
-//import spring.config.app.SpringAppConfig;
+//import com.workhub.logman.config.app.SpringAppConfig;
 //
 //import javax.servlet.ServletContext;
 //import javax.servlet.ServletException;
