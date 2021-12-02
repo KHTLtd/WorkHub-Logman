@@ -3,7 +3,7 @@ package com.workhub.logman.data.constants;
 import lombok.Getter;
 
 public enum SchemaName {
-    LOG("log_schema"),
+    LOG("logman_schema"),
     PG_PATH("ext");
 
     @Getter

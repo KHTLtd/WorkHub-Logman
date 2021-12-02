@@ -24,6 +24,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO implementation for db operations
+ *
+ * @since 1.0.0 | 03.12.2021
+ * @author alexkirillov
+ */
 @Slf4j
 @Repository
 @Transactional(rollbackFor = Exception.class)
@@ -87,6 +93,16 @@ public class LogDataDaoImpl implements ILogDataDao {
         return null;
     }
 
+
+    /**
+     * Look for partitions that fit the 'days' creteria
+     * and return a list of them.
+     *
+     * @param days number of day before partition needs to be deleted
+     * @param template jdbcTemplate
+     * @return partitionNamesList
+     * @throws PersistenceServiceException
+     */
     private List<String> getPartitionsToRemove(int days, JdbcOperations template) throws PersistenceServiceException {
         log.debug("Looking for partitions older than {} days", days);
         List<String> partitionsToDrop = new ArrayList<>();
@@ -100,6 +116,14 @@ public class LogDataDaoImpl implements ILogDataDao {
         return partitionsToDrop;
     }
 
+    /**
+     * Remove a single partition from the db
+     * that fits the 'partitionName' param
+     *
+     * @param partitionName name of the partition to delete
+     * @param template jdbcTemplate
+     * @throws PersistenceServiceException
+     */
     private void removeSinglePartition(String partitionName, JdbcOperations template) throws PersistenceServiceException {
         log.debug("Trying to delete a partition {}", partitionName);
         try {

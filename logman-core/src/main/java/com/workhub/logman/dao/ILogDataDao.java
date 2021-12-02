@@ -20,14 +20,6 @@ public interface ILogDataDao {
      */
     void saveLogs(List<LogData> logList) throws SQLException;
 
-//    /**
-//     * Get partitions to be removed
-//     * base on the number of days
-//     *
-//     * @param days number of days to select a partition by
-//     */
-//    void getPartitionsToRemove(int days);
-
     /**
      * Remove partitions from a certain DB
      *

@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * Persistence service impl for db operations
+ *
+ * @since 1.0.0 | 03.12.2021
+ * @author alexkirillov
+ */
 public class PersistenceServiceImpl implements IPersistenceService {
 
     private final int batchSize;

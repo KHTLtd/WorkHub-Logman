@@ -16,17 +16,17 @@ public class LogDataMapping extends AbstractMapping<LogData> {
         super(schema.toString(), "log");
 
         //Strings
-        mapText("lmHost", LogData::getLmHost);
-        mapText("lmAddress", LogData::getLmAddress);
+        mapText("lm_host", LogData::getLmHost);
+        mapText("lm_address", LogData::getLmAddress);
         mapText("logger", LogData::getLogger);
         mapText("subsystem", LogData::getSubsystem);
-        mapText("subHost", LogData::getSubHost);
-        mapText("subAddress", LogData::getSubAddress);
+        mapText("sub_host", LogData::getSubHost);
+        mapText("sub_address", LogData::getSubAddress);
         mapText("ex", LogData::getEx);
         mapText("message", LogData::getMessage);
         //LocalDateTime
-        mapTimeStamp("insertStamp", LogData::getInsertStamp);
-        mapTimeStamp("createStamp", LogData::getCreateStamp);
+        mapTimeStamp("insert_stamp", LogData::getInsertStamp);
+        mapTimeStamp("create_stamp", LogData::getCreateStamp);
     }
 
 }
