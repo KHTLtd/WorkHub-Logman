@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -41,17 +42,18 @@ public class LogDataDaoImpl implements ILogDataDao {
 
     @Override
     public void saveLogs(List<LogData> logs) throws SQLException {
-        if (logs.isEmpty()) {
+        if (CollectionUtils.isEmpty(logs)) {
             return;
         }
-        Connection connection = DataSourceUtils.getConnection(dataSource);
+        final Connection connection = DataSourceUtils.getConnection(dataSource);
         try {
-            log.debug("Obtained connection: {}", connection);
+            log.debug("Obtained connection: {}, of class: {}, datasource: {}",
+                    connection, connection.getClass(), this.dataSource);
             PgBulkInsert<LogData> bulkInsert = new PgBulkInsert<>(new LogDataMapping(SchemaName.LOG));
             final PGConnection pgConnection = connection.unwrap(PGConnection.class);
             bulkInsert.saveAll(pgConnection, logs.stream());
         } catch (Exception e) {
-            log.error("Failed to write data to Database. Reason: " + e.getMessage(), e);
+            log.error("Failed to save data to Database. Reason: " + e.getMessage(), e);
             throw e;
         } finally {
             DataSourceUtils.releaseConnection(connection, this.dataSource);
