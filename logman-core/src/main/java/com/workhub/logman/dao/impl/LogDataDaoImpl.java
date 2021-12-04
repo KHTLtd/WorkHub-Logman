@@ -1,7 +1,9 @@
 package com.workhub.logman.dao.impl;
 
 import com.workhub.logman.dao.ILogDataDao;
-import com.workhub.logman.dao.mapping.LogDataMapping;
+import com.workhub.logman.dao.mapping.LogDataNamedParameterMapper;
+import com.workhub.logman.dao.mapping.LogDataPgBulkMapping;
+import com.workhub.logman.data.LogDataSearchParams;
 import com.workhub.logman.data.constants.SchemaName;
 import com.workhub.logman.exceptions.PersistenceServiceException;
 import com.workhub.logman.routing.RoutingDataSource;
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,9 +40,17 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class LogDataDaoImpl implements ILogDataDao {
 
+    private final String  FIND_BY_LOG_ID_QUERY = "select * from " + SchemaName.LOG + ".log ld "
+            + "where ld.create_stamp between :from and :to "
+            + "and ld.log_id = :logId "
+            + "order by ld.create_stamp desc";
+
     @Autowired
     @Qualifier("logmanDs")
     private RoutingDataSource dataSource;
+
+    @Autowired
+    NamedParameterJdbcOperations namedParameterTemplate;
 
     @Override
     public void saveLogs(List<LogData> logs) throws SQLException {
@@ -49,7 +61,7 @@ public class LogDataDaoImpl implements ILogDataDao {
         try {
             log.debug("Obtained connection: {}, of class: {}, datasource: {}",
                     connection, connection.getClass(), this.dataSource);
-            PgBulkInsert<LogData> bulkInsert = new PgBulkInsert<>(new LogDataMapping(SchemaName.LOG));
+            PgBulkInsert<LogData> bulkInsert = new PgBulkInsert<>(new LogDataPgBulkMapping(SchemaName.LOG));
             final PGConnection pgConnection = connection.unwrap(PGConnection.class);
             bulkInsert.saveAll(pgConnection, logs.stream());
         } catch (Exception e) {
@@ -78,6 +90,7 @@ public class LogDataDaoImpl implements ILogDataDao {
         } catch (PersistenceServiceException e) {
             log.error("Caught exception while seraching for partitions to remove: "
                     + e.getMessage(), e);
+            throw e;
         }
         for (String partition : partitionsToRemove) {
             try {
@@ -91,8 +104,20 @@ public class LogDataDaoImpl implements ILogDataDao {
 
 
     @Override
-    public List<LogData> findByTraceId() {
-        return null;
+    public List<LogData> findByTraceId(LogDataSearchParams searchParams) throws PersistenceServiceException {
+        List<LogData> logDataList;
+        try {
+            MapSqlParameterSource map = new MapSqlParameterSource();
+            map.addValue("logId", searchParams.getLogId());
+            map.addValue("from", searchParams.getStartTime());
+            map.addValue("to", searchParams.getEndTime());
+
+            logDataList = namedParameterTemplate.query(FIND_BY_LOG_ID_QUERY, map, new LogDataNamedParameterMapper());
+        } catch (Exception e) {
+            log.error("Failed to retrieve logs by traceId: " + e.getMessage(), e);
+            throw new PersistenceServiceException("Failed to get logs: " + e.getMessage(), e);
+        }
+        return logDataList;
     }
 
 
@@ -109,10 +134,11 @@ public class LogDataDaoImpl implements ILogDataDao {
         log.debug("Looking for partitions older than {} days", days);
         List<String> partitionsToDrop = new ArrayList<>();
         try {
-            partitionsToDrop = template.query("select partition from " + SchemaName.PG_PATH + "pathman-partition_list where range_max::date < now() - interval '" + days + " day'"
+            partitionsToDrop = template.query("select partition from " + SchemaName.PG_PATH
+                    + "pathman-partition_list where range_max::date < now() - interval '" + days + " day'"
                     , (resultSet, i) -> resultSet.getString(1));
         } catch (Exception e) {
-            throw new PersistenceServiceException("Failed to retrieve partitions to remove: ", e);
+            throw new PersistenceServiceException("Failed to retrieve partitions to remove: " + e.getMessage(), e);
         }
         log.debug("Found {} partitions", partitionsToDrop.size());
         return partitionsToDrop;
@@ -131,7 +157,7 @@ public class LogDataDaoImpl implements ILogDataDao {
         try {
             template.execute("drop table " + partitionName + " cascade;");
         } catch (Exception e) {
-            throw new PersistenceServiceException("Failed to delete partition: " + partitionName);
+            throw new PersistenceServiceException("Failed to delete partition: " + partitionName, e);
         }
         log.debug("Partition {} was removed", partitionName);
     }

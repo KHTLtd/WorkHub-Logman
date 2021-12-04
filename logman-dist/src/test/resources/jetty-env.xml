@@ -79,5 +79,17 @@
     </New>
 
     <!-- V WORK MANAGERS V -->
+    <New id="persistenceTaskExecutor" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>jboss/ee/concurrency/executor/persistenceTaskExecutor</Arg>
+        <Arg>
+            <New class="workhub.commons.concurrency.workmanagers.JettyWorkManager"/>
+        </Arg>
+    </New>
+    <New id="partitionsTaskExecutor" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>jboss/ee/concurrency/executor/partitionsTaskExecutor</Arg>
+        <Arg>
+            <New class="workhub.commons.concurrency.workmanagers.JettyWorkManager"/>
+        </Arg>
+    </New>
 
 </Configure>

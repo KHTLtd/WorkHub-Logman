@@ -15,7 +15,7 @@ public class KafkaLogsConsumer {
     @KafkaListener(topicPattern = "workhub.*.logman.log", concurrency = "1")
     public void save(ConsumerRecord<String, String> logData) throws Exception {
         LogData logRecord = UtilJson.readFromJson(logData.value(), LogData.class);
-        service.saveLog(logRecord);
+        service.save(logRecord);
     }
 
 }
