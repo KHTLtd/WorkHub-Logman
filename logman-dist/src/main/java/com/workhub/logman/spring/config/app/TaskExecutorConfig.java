@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.DefaultManagedTaskExecutor;
 import com.workhub.commons.concurrency.executors.BlockingTaskExecutor;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.concurrent.DefaultManagedTaskExecutor;
+import com.workhub.commons.concurrency.executors.BlockingTaskExecutor;
+
 /**
  * TaskExecutor Beans configuration
  *
