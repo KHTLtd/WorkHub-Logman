@@ -39,5 +39,3 @@ transaction-logs
 *.lck
 .mvn
 .github
-mvnw
-mvnw.cmd
