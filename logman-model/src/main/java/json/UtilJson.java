@@ -104,7 +104,13 @@ public abstract class UtilJson {
                 jsonString.append("\",");
             } else {
                 try {
-                    jsonString.append(methods.get(i).invoke(object)).append("\"");
+                    if (methodName.contains("Stamp")) {
+                        jsonString.append(((LocalDateTime)methods.get(i).invoke(object))
+                                .toInstant(ZoneId.systemDefault().getRules().getOffset(Instant.now()))
+                                .toEpochMilli()).append("\"");
+                    } else {
+                        jsonString.append(methods.get(i).invoke(object)).append("\"");
+                    }
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     log.error("Failed to invoke getter of the object [{}]. Value will be set to NULL", object);
                 }

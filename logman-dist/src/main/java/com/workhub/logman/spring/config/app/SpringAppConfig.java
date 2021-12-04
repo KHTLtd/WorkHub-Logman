@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.jndi.JndiAccessor;
 
-@Import({BeansConfig.class, DataSourcesConfig.class, ControllerConfig.class})
+@Import({BeansConfig.class, DataSourcesConfig.class, ControllerConfig.class, TaskExecutorConfig.class})
 public class SpringAppConfig {
 
     @Bean

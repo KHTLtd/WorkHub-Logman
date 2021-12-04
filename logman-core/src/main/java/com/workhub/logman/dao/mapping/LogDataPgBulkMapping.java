@@ -10,9 +10,9 @@ import de.bytefish.pgbulkinsert.mapping.AbstractMapping;
  * @author alexkirillov
  * @since 1.0.0 | 24.11.2021
  */
-public class LogDataMapping extends AbstractMapping<LogData> {
+public class LogDataPgBulkMapping extends AbstractMapping<LogData> {
 
-    public LogDataMapping(SchemaName schema) {
+    public LogDataPgBulkMapping(SchemaName schema) {
         super(schema.toString(), "log");
 
         //Strings

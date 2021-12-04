@@ -1,6 +1,8 @@
 package com.workhub.logman.dao;
 
 import com.workhub.logman.data.LogData;
+import com.workhub.logman.data.LogDataSearchParams;
+import com.workhub.logman.exceptions.PersistenceServiceException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -28,7 +30,13 @@ public interface ILogDataDao {
      */
     void removePartitions(int days, String dsKey) throws Exception;
 
-    // TODO: Later. For data collecting
-    List<LogData> findByTraceId();
+    /**
+     * Retrieve log records fitting the search criteria
+     *
+     * @param params
+     * @return
+     * @throws PersistenceServiceException
+     */
+    List<LogData> findByTraceId(LogDataSearchParams params) throws PersistenceServiceException;
 
 }

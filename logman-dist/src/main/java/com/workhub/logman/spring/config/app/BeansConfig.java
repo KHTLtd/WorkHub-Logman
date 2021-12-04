@@ -5,8 +5,10 @@ import com.workhub.logman.dao.impl.LogDataDaoImpl;
 import com.workhub.logman.spring.config.kafka.KafkaConfig;
 import com.workhub.logman.persistence.service.IPersistenceService;
 import com.workhub.logman.persistence.service.impl.PersistenceServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.task.AsyncTaskExecutor;
 
 /**
  * Service Beans config
@@ -17,8 +19,11 @@ import org.springframework.context.annotation.Import;
 public class BeansConfig {
 
     @Bean
-    public IPersistenceService persistenceService() {
-        return new PersistenceServiceImpl();
+    public IPersistenceService persistenceService(
+            @Qualifier("persistenceTaskExecutor") AsyncTaskExecutor executor,
+            ILogDataDao dao
+    ) {
+        return new PersistenceServiceImpl(executor, dao);
     }
 
     @Bean

@@ -1,6 +1,6 @@
 package com.workhub.logman.exceptions;
 
-public class PersistenceServiceException extends Throwable {
+public class PersistenceServiceException extends Exception {
 
     public PersistenceServiceException(String message) {
         super(message);
