@@ -1,9 +1,8 @@
 package com.workhub.logman.spring.config.app;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.DefaultManagedTaskExecutor;
-import workhub.commons.concurrency.executors.BlockingTaskExecutor;
+import com.workhub.commons.concurrency.executors.BlockingTaskExecutor;
 
 /**
  * TaskExecutor Beans configuration
