@@ -34,7 +34,7 @@
 
         <!-- JAVA PROJECT SETTINGS -->
         <java.version>11</java.version>
-        <project.build.source.encoding>UTF-8</project.build.source.encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- MAVEN PROJECT SETTINGS -->
         <maven.compiler.source>11</maven.compiler.source>
@@ -44,6 +44,9 @@
         <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
         <maven.javadoc.plugin.version>3.1.1</maven.javadoc.plugin.version>
         <versions.maven.plugin.version>2.7</versions.maven.plugin.version>
+
+        <!-- OUR LIBS VERSIONING -->
+        <commons.version>0.0.1-SNAPSHOT</commons.version>
 
         <!-- 3rd PARTY LIBS VERSIONING -->
         <spring.boot.version>2.6.0</spring.boot.version>
@@ -57,10 +60,9 @@
     </scm>
 
     <distributionManagement>
-        <!-- TODO: JUST A PLACEHOLDER. CORRECT TO CORRECT REPO LINK LATER -->
         <repository>
-            <id>TEST</id>
-            <url>TEST</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/KHTLtd/workhub-logman</url>
         </repository>
     </distributionManagement>
 
@@ -79,6 +81,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Our Libs -->
+            <dependency>
+                <groupId>com.workhub</groupId>
+                <artifactId>commons-concurrency</artifactId>
+                <version>${commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.workhub</groupId>
+                <artifactId>commons-utils</artifactId>
+                <version>${commons.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
