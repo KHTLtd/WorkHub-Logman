@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Custom
+transaction-logs
+*.epoch
+*.log
+*.lck
+.mvn
+.github
+mvnw
+mvnw.cmd
