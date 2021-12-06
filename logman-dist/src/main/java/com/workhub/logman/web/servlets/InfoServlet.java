@@ -1,4 +1,4 @@
-package com.workhub.logman.web.servlet;
+package com.workhub.logman.web.servlets;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
