@@ -1,5 +1,6 @@
 package com.workhub.logman.test;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.osjava.sj.loader.JndiLoader;
@@ -15,10 +16,10 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@SpringBootTest
 class AppInitTest {
 
 	@Test
+	@Ignore
 	public void init() throws NamingException {
 		final DataSource logDs0 = (new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)
@@ -56,16 +57,6 @@ class AppInitTest {
 		final InitialContext context = new InitialContext(jndi);
 		final JndiLoader loader = new JndiLoader(context.getEnvironment());
 		loader.load(jndi, context);
-	}
-
-	@Configuration
-	class Config {
-
-		@Bean
-		KafkaProperties properties() {
-			return new KafkaProperties();
-		}
-
 	}
 
 }

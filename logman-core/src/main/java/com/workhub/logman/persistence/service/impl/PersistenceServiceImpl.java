@@ -1,6 +1,6 @@
 package com.workhub.logman.persistence.service.impl;
 
-import com.workhub.commons.utils.InetAddressUtil;
+import com.workhub.commons.utils.inet.InetAddressUtil;
 import com.workhub.logman.dao.ILogDataDao;
 import com.workhub.logman.data.LogData;
 import com.workhub.logman.data.LogDataSearchParams;

@@ -47,6 +47,7 @@ public class LogController {
         }
     }
 
+    //TODO FOR TESTING
     public LogData getPlaceholderData() {
         LogData logData = new LogData();
         logData.setCreateStamp(LocalDateTime.now());

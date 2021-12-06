@@ -1,13 +1,12 @@
 package com.workhub.logman.data;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.workhub.logman.data.deserialization.LocalDateTimeDeserializer;
-import json.UtilJson;
+import com.workhub.commons.utils.json.UtilJson;
+import com.workhub.commons.utils.json.deserialization.LocalDateTimeDeserializer;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.UUID;
 
 /**
