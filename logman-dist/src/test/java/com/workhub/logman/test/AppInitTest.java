@@ -1,12 +1,9 @@
 package com.workhub.logman.test;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.osjava.sj.loader.JndiLoader;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import com.workhub.logman.spring.config.app.SpringAppConfig;
@@ -19,7 +16,6 @@ import java.util.Properties;
 class AppInitTest {
 
 	@Test
-	@Ignore
 	public void init() throws NamingException {
 		final DataSource logDs0 = (new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)

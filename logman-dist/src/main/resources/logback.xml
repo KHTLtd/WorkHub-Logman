@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <logger name="org.springframework" level="ERROR"/>
-    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+<configuration scan="false" packagingData="true">
+    <property resource="META-INF/application.properties" />
+    <property name="LOG_FOLDER" value="${server.root}/logs"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <Pattern>
-                %d{HH:mm:ss.SSS} %blue(%-5level) %magenta(%logger{36}) - %msg %n
+                %d{HH:mm:ss.SSS}|%-5level|%thread|%mdc{MessageListener}|%mdc{logId}|%logger{36}|%msg%n
             </Pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FOLDER}/${distr.subsystem}/${distr.subsystem}-${distr.version}-${distr.build.number}.%d{yyyy-MM-dd-HH-mm}.%i.log.zip</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
     </appender>
 
-    <root>
-        <level value="INFO" />
-        <appender-ref ref="consoleAppender" />
-    </root>
+    <appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>1250</queueSize> <!-- Lines per sec -->
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <logger name="FILE_LOGGER">
+        <level value="INFO"/>
+        <appender-ref ref="FILE_ASYNC"/>
+    </logger>
+    <logger name="org.springframework.kafka">
+        <level value="ALL"/>
+        <appender-ref ref="FILE_ASYNC"/>
+    </logger>
+    <logger name="com.workhub">
+        <level value="INFO"/>
+        <appender-ref ref="FILE_ASYNC"/>
+    </logger>
 </configuration>
