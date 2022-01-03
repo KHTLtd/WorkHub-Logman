@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <logger name="org.springframework" level="ERROR"/>
-    <logger name="com.zetcode" level="INFO"/>
-
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <Pattern>%d{HH:mm:ss.SSS} %blue(%-5level) %magenta(%logger{36}) - %msg %n
+            <Pattern>
+                %d{HH:mm:ss.SSS}|%-5level|%thread|%mdc{MessageListener}|%mdc{logId}|%logger{36}|%msg%n
             </Pattern>
         </encoder>
     </appender>
-
     <root>
         <level value="INFO" />
         <appender-ref ref="consoleAppender" />
