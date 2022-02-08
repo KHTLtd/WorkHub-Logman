@@ -1,6 +1,6 @@
 package com.workhub.logman.spring.config.kafka;
 
-import com.workhub.logman.kafka.consumer.KafkaLogsConsumer;
+import com.workhub.logman.kafka.KafkaLogsConsumer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

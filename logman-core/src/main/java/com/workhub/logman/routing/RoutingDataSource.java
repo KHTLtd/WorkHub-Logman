@@ -1,5 +1,6 @@
 package com.workhub.logman.routing;
 
+import com.workhub.logman.exceptions.LogmanDatasourceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.jdbc.datasource.lookup.DataSourceLookup;
@@ -64,19 +65,20 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
             throw new DataSourceLookupFailureException("Failed to instantiate some datasources: " + unResolvedDataSources);
         }
 
-        log.info("Successfully configured" + resolvedDataSources.size() + "datasources. DS Keys: " + resolvedKeys);
+        log.info("Successfully configured {} datasources. DS Keys: {}", resolvedDataSources.size(), resolvedKeys);
         super.setDataSourceLookup(new LocalDataSourceLookUp());
         this.setTargetDataSources(targetDataSources);
         super.setDefaultTargetDataSource(resolvedDataSources.get(0));
         super.afterPropertiesSet();
     }
 
-    public DataSource getInitialisedDataSource(String dsKey) throws ClassNotFoundException {
+    public DataSource getInitialisedDataSource(String dsKey) throws LogmanDatasourceException {
         if (resolvedKeys.contains(dsKey)) {
             return this.resolveSpecifiedDataSource(dsKey);
         } else {
             /* FIXME: PLACEHOLDER EXCEPTION */
-            throw new ClassNotFoundException("");
+            throw new LogmanDatasourceException("The resolved keys list does not contain "
+                    + "the passed value : [{" + dsKey + "}]");
         }
     }
 

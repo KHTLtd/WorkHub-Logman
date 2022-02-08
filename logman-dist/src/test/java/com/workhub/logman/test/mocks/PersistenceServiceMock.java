@@ -3,7 +3,7 @@ package com.workhub.logman.test.mocks;
 import com.workhub.logman.data.LogData;
 import com.workhub.logman.data.LogDataSearchParams;
 import com.workhub.logman.exceptions.PersistenceServiceException;
-import com.workhub.logman.persistence.service.IPersistenceService;
+import com.workhub.logman.persistence.IPersistenceService;
 
 import java.util.List;
 
