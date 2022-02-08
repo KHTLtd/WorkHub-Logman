@@ -39,3 +39,6 @@ transaction-logs
 *.lck
 .mvn
 .github
+
+# logs
+/unsaved-logs/

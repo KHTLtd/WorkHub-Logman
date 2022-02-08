@@ -1,0 +1,18 @@
+========================================================================================================================
+                    Subsystem:  Logman     |  Changelog/Update manual   |  Version:  D01.000.00
+========================================================================================================================
+
+1. New System Properties:
+    1.1 logman.db.key - key of the datasource shard (0....10)
+
+
+
+2. New Meta Properties:
+    2.1 workhub.*.logman.log - kafka topic that is Logman subscribed to
+                               (every topic that fits the wildcard,
+                               like workhub.uucs.logman.log/workhub.uts.logman.log)
+
+
+3. Deleted System Properties:
+
+4. Deleted Meta Properties:

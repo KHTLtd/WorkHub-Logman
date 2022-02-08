@@ -1,4 +1,4 @@
-package com.workhub.logman.persistence.service;
+package com.workhub.logman.persistence;
 
 import com.workhub.logman.data.LogData;
 import com.workhub.logman.data.LogDataSearchParams;
