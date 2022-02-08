@@ -4,7 +4,7 @@
 
 1. New System Properties:
     1.1 logman.db.key - key of the datasource shard (0....10)
-
+    1.2 logman.unsaved.logs.path - path to folder where to store unsaved logs
 
 
 2. New Meta Properties:
