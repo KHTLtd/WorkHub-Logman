@@ -13,7 +13,7 @@
  -->
 
 <module name = "Checker">
-<!--    <property name="severity" value="error"/>-->
+    <!--    <property name="severity" value="error"/>-->
     <property name="fileExtensions" value="java"/>
 
     <module name="NewlineAtEndOfFile">
@@ -50,7 +50,12 @@
         <module name="OperatorWrap"/>
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter"/>
-        <module name="WhitespaceAround"/>
+        <module name="WhitespaceAround">
+            <property name="tokens"
+                      value="ASSIGN,DIV_ASSIGN,PLUS_ASSIGN,MINUS_ASSIGN,STAR_ASSIGN,
+            MOD_ASSIGN,SR_ASSIGN,BSR_ASSIGN,SL_ASSIGN,BXOR_ASSIGN,
+            BOR_ASSIGN,BAND_ASSIGN"/>
+        </module>
         <module name="FallThrough"/>
         <module name="UpperEll"/>
         <module name="ModifierOrder"/>
@@ -98,7 +103,7 @@
         </module>
         <module name="IllegalType">
             <property name="illegalClassNames"
-              value="java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList,
+                      value="java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList,
                 java.util.TreeSet, java.util.TreeMap, java.util.Vector, java.util.LinkedHashMap, java.util.LinkedHashSet"/>
         </module>
         <module name="InnerTypeLast"/>
@@ -115,6 +120,7 @@
         <module name="ModifiedControlVariable"/>
         <module name="MultipleVariableDeclarations"/>
         <module name="MultipleStringLiterals">
+            <property name="allowedDuplicates" value="5"/>
             <property name="ignoreOccurrenceContext" value="ANNOTATION, STATIC_INIT, ASSIGN"/>
             <property name="ignoreStringsRegexp" value='(:)|("")|(\))|(, )|( )|(\|)|(/)|(!)|(#)'/>
         </module>
@@ -125,7 +131,7 @@
         <module name="StringLiteralEquality"/>
         <module name="UnnecessaryParentheses"/>
         <module name="AnonInnerLength">
-            <property name="max" value="2"/>
+            <property name="max" value="25"/>
         </module>
         <module name="CovariantEquals"/>
         <module name="EqualsAvoidNull"/>
