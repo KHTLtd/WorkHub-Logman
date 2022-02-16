@@ -15,7 +15,7 @@ public class KafkaLogsConsumer {
     private IPersistenceService service;
 
     @KafkaListener(topicPattern = "workhub.*.logman.log", concurrency = "3")
-    public void save(ConsumerRecord<String, String> logData) throws Exception {
+    public void save(ConsumerRecord<String, String> logData) {
         log.info("Received log entry to write from topic: {}", logData.topic());
         LogData logRecord = UtilJson.readFromJson(logData.value(), LogData.class);
         service.save(logRecord);

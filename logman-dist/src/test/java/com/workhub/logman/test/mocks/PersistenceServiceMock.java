@@ -10,7 +10,7 @@ import java.util.List;
 public class PersistenceServiceMock implements IPersistenceService {
 
     @Override
-    public void save(LogData log) throws Exception {
+    public void save(LogData log) {
 
     }
 
@@ -20,7 +20,7 @@ public class PersistenceServiceMock implements IPersistenceService {
     }
 
     @Override
-    public List<LogData> findByTraceId(LogDataSearchParams params) throws PersistenceServiceException {
+    public List<LogData> findByTraceId(LogDataSearchParams params) {
         return null;
     }
 }

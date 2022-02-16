@@ -7,7 +7,7 @@ public class ControllerConfig {
 
     @Bean
     LogController logController() {
-      return new LogController();
+        return new LogController();
     }
 
 }

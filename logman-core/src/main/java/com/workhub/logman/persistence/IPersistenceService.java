@@ -3,7 +3,6 @@ package com.workhub.logman.persistence;
 import com.workhub.logman.data.LogData;
 import com.workhub.logman.data.LogDataSearchParams;
 import com.workhub.logman.exceptions.PersistenceServiceException;
-import lombok.extern.java.Log;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
  */
 public interface IPersistenceService  {
 
-    void save(LogData log) throws Exception;
+    void save(LogData log);
 
     void removePartition(String dsKey, int days);
 

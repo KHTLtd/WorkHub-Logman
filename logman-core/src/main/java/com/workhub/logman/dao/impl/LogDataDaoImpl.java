@@ -5,6 +5,7 @@ import com.workhub.logman.dao.mapping.LogDataNamedParameterMapper;
 import com.workhub.logman.dao.mapping.LogDataPgBulkMapping;
 import com.workhub.logman.data.LogDataSearchParams;
 import com.workhub.logman.data.constants.SchemaName;
+import com.workhub.logman.exceptions.LogmanDatasourceException;
 import com.workhub.logman.exceptions.PersistenceServiceException;
 import com.workhub.logman.routing.RoutingDataSource;
 import com.workhub.logman.data.LogData;
@@ -50,7 +51,7 @@ public class LogDataDaoImpl implements ILogDataDao {
     private RoutingDataSource dataSource;
 
     @Autowired
-    NamedParameterJdbcOperations namedParameterTemplate;
+    private NamedParameterJdbcOperations namedParameterTemplate;
 
     @Override
     public void saveLogs(List<LogData> logs) throws SQLException {
@@ -74,7 +75,7 @@ public class LogDataDaoImpl implements ILogDataDao {
     }
 
     @Override
-    public void removePartitions(int days, String dsKey) throws Exception {
+    public void removePartitions(int days, String dsKey) throws LogmanDatasourceException, PersistenceServiceException {
         DataSource ds;
         if (!StringUtils.isNullOrWhiteSpace(dsKey)) {
             log.debug("Received a DB key to remove partitions. Key: {}", dsKey);
@@ -135,8 +136,8 @@ public class LogDataDaoImpl implements ILogDataDao {
         List<String> partitionsToDrop = new ArrayList<>();
         try {
             partitionsToDrop = template.query("select partition from " + SchemaName.PG_PATH
-                    + "pathman-partition_list where range_max::date < now() - interval '" + days + " day'"
-                    , (resultSet, i) -> resultSet.getString(1));
+                + "pathman-partition_list where range_max::date < now() - interval '" + days + " day'",
+                (resultSet, i) -> resultSet.getString(1));
         } catch (Exception e) {
             throw new PersistenceServiceException("Failed to retrieve partitions to remove: " + e.getMessage(), e);
         }

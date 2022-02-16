@@ -2,6 +2,7 @@ package com.workhub.logman.dao;
 
 import com.workhub.logman.data.LogData;
 import com.workhub.logman.data.LogDataSearchParams;
+import com.workhub.logman.exceptions.LogmanDatasourceException;
 import com.workhub.logman.exceptions.PersistenceServiceException;
 
 import java.sql.SQLException;
@@ -28,7 +29,7 @@ public interface ILogDataDao {
      * @param days number of days after which partition will be removed
      * @param dsKey key to the DataSource to delete from
      */
-    void removePartitions(int days, String dsKey) throws Exception;
+    void removePartitions(int days, String dsKey) throws LogmanDatasourceException, PersistenceServiceException;
 
     /**
      * Retrieve log records fitting the search criteria

@@ -41,7 +41,7 @@ public class UnsavedLogsHandler implements IUnsavedLogsHandler {
             writer.close();
             writer.flush();
         } catch (Exception e) {
-            log.error("Failed to save into local unsaved logs file! We lost 'em :( . {}",e.getMessage(), e);
+            log.error("Failed to save into local unsaved logs file! We lost 'em :( . {}", e.getMessage(), e);
         }
     }
     

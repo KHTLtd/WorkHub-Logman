@@ -5,6 +5,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public class KafkaLogsConsumerMock extends KafkaLogsConsumer {
     @Override
-    public void save(ConsumerRecord<String, String> logData) throws Exception {
+    public void save(ConsumerRecord<String, String> logData) {
     }
 }
