@@ -12,17 +12,17 @@ import org.springframework.context.annotation.Import;
 @Import(SpringAppConfig.class)
 public class  LogmanApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		ApplicationContext context = SpringApplication.run(LogmanApplication.class, args);
-		for (String name : context.getBeanDefinitionNames()) {
-			System.out.println(name);
-		}
-	}
+    public static void main(String[] args) {
+        ApplicationContext context = SpringApplication.run(LogmanApplication.class, args);
+        for (String name : context.getBeanDefinitionNames()) {
+            System.out.println(name);
+        }
+    }
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(LogmanApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(LogmanApplication.class);
+    }
 }
 
 

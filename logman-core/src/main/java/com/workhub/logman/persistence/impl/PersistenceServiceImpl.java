@@ -36,16 +36,16 @@ public class PersistenceServiceImpl implements IPersistenceService, DisposableBe
     private volatile long lastUpdateTime = -1L;
 
     private final int batchSize = 2; //FIXME: just for initial
-    private final long batchTime = 10 * 1000;// 10 sec //FIXME: just for initial
+    private final long batchTime = 10 * 1000; // 10 sec //FIXME: just for initial
 
     private final AsyncTaskExecutor persistenceTaskExecutor;
     private final ConcurrentLinkedQueue<LogData> queue = new ConcurrentLinkedQueue<>();
     private final Object queueMonitorLock = new Object();
 
     @Autowired
-    ILogDataDao dao;
+    private ILogDataDao dao;
 
-    IUnsavedLogsHandler unsavedLogsHandler = new UnsavedLogsHandler();
+    private IUnsavedLogsHandler unsavedLogsHandler = new UnsavedLogsHandler();
 
     public PersistenceServiceImpl(AsyncTaskExecutor persistenceTaskExecutor, ILogDataDao dao) {
         this.persistenceTaskExecutor = persistenceTaskExecutor;

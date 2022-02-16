@@ -50,19 +50,19 @@ public class LogData implements Serializable, Comparable<LogData> {
     @Override
     public String toString() {
         return
-                "{" +
-                "\"logId\":\"" + logId + '\"' +
-                ", \"insertStamp\":\"" + insertStamp + '\"' +
-                ", \"lmHost\":\"" + lmHost + '\"' +
-                ", \"lmAddress\":\"" + lmAddress + '\"' +
-                ", \"logger\":\"" + logger + '\"' +
-                ", \"subsystem\":\"" + subsystem + '\"' +
-                ", \"subHost\":\"" + subHost + '\"' +
-                ", \"subAddress\":\"" + subAddress + '\"' +
-                ", \"createStamp\":\"" + createStamp + '\"' +
-                ", \"ex\":\"" + ex + '\"' +
-                ", \"message\":\"" + message + '\"' +
-                '}';
+                "{"
+                + "\"logId\":\"" + logId + '\"'
+                + ", \"insertStamp\":\"" + insertStamp + '\"'
+                + ", \"lmHost\":\"" + lmHost + '\"'
+                + ", \"lmAddress\":\"" + lmAddress + '\"'
+                + ", \"logger\":\"" + logger + '\"'
+                + ", \"subsystem\":\"" + subsystem + '\"'
+                + ", \"subHost\":\"" + subHost + '\"'
+                + ", \"subAddress\":\"" + subAddress + '\"'
+                + ", \"createStamp\":\"" + createStamp + '\"'
+                + ", \"ex\":\"" + ex + '\"'
+                + ", \"message\":\"" + message + '\"'
+                + '}';
     }
 
     public String toJsonString() {
