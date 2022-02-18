@@ -6,6 +6,17 @@
     1.1 logman.db.key - key of the datasource shard (0....10)
     1.2 logman.unsaved.logs.path - path to folder where to store unsaved logs
 
+    *V from commons lib V*
+    1.3 commons.kafka.producer.topic - kafka topic to send locally produced massages to | Default: workhub.dev.test.log
+    1.4 commons.kafka.producer.bootstrap.servers - kafka broker urls for producer | Default:
+    1.5 commons.kafka.producer.batch.size - batch size for messages in bytes | Default: 1024
+    1.6 commons.kafka.producer.client.id - client id for producer | Default: wkp-0
+    1.7 commons.kafka.producer.acks - acknowledgement value | Default: 0
+    1.8 commons.kafka.consumer.bootstrap.servers - kafka broker urls for consumer
+    1.9 commons.kafka.consumer.aor - auto offset reset property | Default: eraliest
+    1.10 commons.kafka.consumer.client.id - client id for consumer | Default: wkl-0
+    1.11 commons.kafka.consumer.group.id - group id for consumer | Default: g-wkl-0
+
 
 2. New Meta Properties:
     2.1 workhub.*.logman.log - kafka topic that is Logman subscribed to

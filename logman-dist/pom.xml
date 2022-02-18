@@ -26,6 +26,10 @@
 
         <dependency>
             <groupId>com.workhub</groupId>
+            <artifactId>commons-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.workhub</groupId>
             <artifactId>commons-concurrency</artifactId>
         </dependency>
 
