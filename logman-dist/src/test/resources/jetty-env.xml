@@ -92,4 +92,10 @@
         </Arg>
     </New>
 
+<!--    System properties   -->
+    <Call name="setProperty" class="java.lang.System">
+        <Arg>commons.kafka.producer.topic</Arg>
+        <Arg>workhub.dev.test.log</Arg>
+    </Call>
+
 </Configure>

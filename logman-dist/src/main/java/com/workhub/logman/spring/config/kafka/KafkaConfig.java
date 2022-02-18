@@ -1,36 +1,31 @@
 package com.workhub.logman.spring.config.kafka;
 
+import com.workhub.commons.kafka.consumer.config.KafkaCommonsConsumerBeanConfig;
+import com.workhub.commons.kafka.producer.config.KafkaCommonsProducerBeanConfig;
+import com.workhub.logman.handlers.errors.KafkaErrorHandler;
 import com.workhub.logman.kafka.KafkaLogsConsumer;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import com.workhub.logman.persistence.IPersistenceService;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.core.ConsumerFactory;
-import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.context.annotation.Import;
 import org.springframework.kafka.core.ProducerFactory;
 
-@Configuration
+@Import({KafkaCommonsProducerBeanConfig.class, KafkaCommonsConsumerBeanConfig.class})
 public class KafkaConfig {
 
     @Bean
-    KafkaLogsConsumer kafkaLogsConsumer() {
-        return new KafkaLogsConsumer();
+    KafkaLogsConsumer kafkaLogsConsumer(IPersistenceService service) {
+        return new KafkaLogsConsumer(service);
+    }
+
+    @Bean("kafkaListenerErrorHandler")
+    KafkaErrorHandler errorHandler() {
+        return new KafkaErrorHandler();
     }
 
     @Bean
-    KafkaTemplate<String, String> kafkaLogTemplate(ProducerFactory<String, String> factory) {
-        return new KafkaTemplate<>(factory);
-    }
-
-    @Bean
-    ProducerFactory<String, String> kafkaLogProducer(KafkaProperties properties) {
-        return new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
-    }
-
-    @Bean
-    ConsumerFactory<String, String> kafkaLogConsumer(KafkaProperties properties) {
-        return new DefaultKafkaConsumerFactory<>(properties.buildConsumerProperties());
+    ProducerFactory<Object, Object> producerFactory(ApplicationContext context) {
+        return (ProducerFactory<Object, Object>) context.getBean("whKafkaProducerFactory");
     }
 
 }

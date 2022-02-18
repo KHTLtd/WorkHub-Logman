@@ -1,12 +1,11 @@
 package com.workhub.logman.spring.config.app;
 
-import com.workhub.logman.spring.config.web.ControllerConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.jndi.JndiAccessor;
 
-@Import({BeansConfig.class, DataSourcesConfig.class, ControllerConfig.class, TaskExecutorConfig.class})
+@Import({BeansConfig.class, DataSourcesConfig.class, TaskExecutorConfig.class})
 public class SpringAppConfig {
 
     @Bean

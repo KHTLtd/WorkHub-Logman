@@ -1,7 +1,6 @@
 package com.workhub.logman.spring.config.app;
 
 import com.workhub.logman.dao.ILogDataDao;
-import com.workhub.logman.dao.impl.LogDataDaoImpl;
 import com.workhub.logman.spring.config.kafka.KafkaConfig;
 import com.workhub.logman.persistence.IPersistenceService;
 import com.workhub.logman.persistence.impl.PersistenceServiceImpl;
@@ -26,8 +25,4 @@ public class BeansConfig {
         return new PersistenceServiceImpl(executor, dao);
     }
 
-    @Bean
-    public ILogDataDao logDataDao() {
-        return new LogDataDaoImpl();
-    }
 }

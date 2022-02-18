@@ -34,6 +34,7 @@
             <groupId>de.bytefish</groupId>
             <artifactId>pgbulkinsert</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
