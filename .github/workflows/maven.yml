@@ -15,9 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - run: cd..
-    - uses: actions/checkout@v3
+    - name: Download Dependencies
+      uses: actions/checkout@v3
       with:
         repository: 'KHTLtd/Workhub-Commons'
         ref: 'release/0.0.1'
@@ -26,10 +25,12 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
-        distribution: 'temurin'
+        distribution: 'adopt'
         cache: maven
     - name: Build Dependencies
       run: mvn clean install --file pom.xml
+    - name: Checkout Main Project
+      uses: actions/checkout@v2
     - name: Build with Maven
       run: cd ../WorkHub-Logman && mvn clean validate compile test install --file pom.xml
       
