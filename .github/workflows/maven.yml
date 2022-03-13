@@ -34,7 +34,7 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Build Dependencies
-      run: mvn clean install --file pom.xml
+      run: mvn clean install --file pom.xml -DskipTests
     - name: Checkout Main Project
       uses: actions/checkout@v2
     - name: Build with Maven
