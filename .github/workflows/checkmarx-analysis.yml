@@ -25,7 +25,18 @@ jobs:
 
     # Steps require - checkout code, run CxFlow Action, Upload SARIF report (optional)
     steps:
+    - name: Setup PKs for Private Repos
+      uses: shaunco/ssh-agent@git-repo-mapping # this action will configure git to use the right SSH key per each repository. 
+      with:
+        ssh-private-key: ${{ secrets.WH_COMMONS_PK }}
+        repo-mappings: 'github.com/KHTLtd/Workhub-Commons'
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Download Dependencies
+      uses: actions/checkout@v3
+      with:
+        repository: 'KHTLtd/Workhub-Commons'
+        ref: 'release/0.0.1'
+        clean: 'false'
     - uses: actions/checkout@v2
     # Runs the Checkmarx Scan leveraging the latest version of CxFlow - REFER to Action README for list of inputs
     - name: Checkmarx CxFlow Action
