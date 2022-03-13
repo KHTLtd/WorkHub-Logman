@@ -15,6 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Setup PKs for Private Repos
+      uses: shaunco/ssh-agent@git-repo-mapping # this action will configure git to use the right SSH key per each repository. 
+      with:
+        ssh-private-key: |
+          ${{ secrets.WH_COMMONS_PK }}
+        repo-mappings: |
+          github.com/KHTLtd/Workhub-Commons
+
     - name: Download Dependencies
       uses: actions/checkout@v3
       with:
