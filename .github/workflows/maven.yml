@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: cd..
-    - uses: actions/checkout@3
+    - uses: actions/checkout@v3
       with:
         repository: 'KHTLtd/Workhub-Commons'
         ref: 'release/0.0.1'
