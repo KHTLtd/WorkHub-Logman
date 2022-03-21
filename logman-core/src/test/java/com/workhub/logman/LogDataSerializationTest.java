@@ -33,11 +33,13 @@ public class LogDataSerializationTest {
         logData.setSubHost("1.1.1.1");
         logData.setLmAddress("localhost");
         logData.setSubAddress("otherhost");
-        logData.setSubsystem("TESTING");
+        logData.setDistrSubsystem("TESTING");
+        logData.setDistrVersion("1.0.0");
+        logData.setDistrBuildNumber("1");
         logData.setLogger("TestLogger");
         logData.setMessage("TestMessage for LogData 1123");
         logData.setEx("TESTINGException");
-        logData.setCreateStamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(1638815578749L), ZoneId.systemDefault()));
+        logData.setStamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(1638815578749L), ZoneId.systemDefault()));
         logData.setInsertStamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(1638816178749L), ZoneId.systemDefault()));
 
         return logData;

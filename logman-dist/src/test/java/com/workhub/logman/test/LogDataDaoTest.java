@@ -5,16 +5,12 @@ import com.workhub.logman.data.LogData;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jndi.JndiObjectFactoryBean;
-import org.springframework.test.context.ContextConfiguration;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -31,7 +27,7 @@ public class LogDataDaoTest {
     @Test
     public void saveLogs() throws SQLException {
         try {
-            dao.saveLogs(Collections.emptyList());
+            dao.saveLogs(Collections.singletonList(getPlaceholderData()));
         } catch (Exception e) {
             log.error(e.toString());
             Assertions.fail();
@@ -41,14 +37,16 @@ public class LogDataDaoTest {
 
     public LogData getPlaceholderData() {
         LogData logData = new LogData();
-        logData.setCreateStamp(LocalDateTime.now());
+        logData.setStamp(LocalDateTime.now());
         logData.setInsertStamp(LocalDateTime.now().plusMinutes(10));
         logData.setLmAddress("donut");
         logData.setSubAddress("donut");
         logData.setLmHost("donut");
         logData.setSubHost("donut");
         logData.setLogger("donut");
-        logData.setSubsystem("donut");
+        logData.setDistrSubsystem("donut");
+        logData.setDistrVersion("1.0.0");
+        logData.setDistrBuildNumber("1");
         logData.setMessage("donut");
         logData.setEx("donut");
         logData.setLogId(UUID.randomUUID());

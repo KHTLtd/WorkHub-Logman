@@ -19,14 +19,14 @@ public class LogDataPgBulkMapping extends AbstractMapping<LogData> {
         mapText("lm_host", LogData::getLmHost);
         mapText("lm_address", LogData::getLmAddress);
         mapText("logger", LogData::getLogger);
-        mapText("subsystem", LogData::getSubsystem);
+        mapText("subsystem", LogData::getDistrSubsystem);
         mapText("sub_host", LogData::getSubHost);
         mapText("sub_address", LogData::getSubAddress);
         mapText("ex", LogData::getEx);
         mapText("message", LogData::getMessage);
         //LocalDateTime
         mapTimeStamp("insert_stamp", LogData::getInsertStamp);
-        mapTimeStamp("create_stamp", LogData::getCreateStamp);
+        mapTimeStamp("create_stamp", LogData::getStamp);
     }
 
 }

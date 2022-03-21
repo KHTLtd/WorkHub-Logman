@@ -32,17 +32,20 @@ public class LogData implements Serializable, Comparable<LogData> {
 
     /* Incoming log data */
 
+    /* Name of the subsystem that produced the log */
+    private String distrSubsystem;
+    private String distrVersion;
+    private String distrBuildNumber;
+
     /* Name of the logger that produced the log */
     private String logger;
-    /* Name of the subsystem that produced the log */
-    private String subsystem;
     /* Subsystems host name */
     private String subHost;
     /* Subsystems url address */
     private String subAddress;
     /* Time the log was produced on the subsystem */
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime createStamp;
+    private LocalDateTime stamp;
 
     private String ex;
     private String message;
@@ -56,10 +59,10 @@ public class LogData implements Serializable, Comparable<LogData> {
                 + ", \"lmHost\":\"" + lmHost + '\"'
                 + ", \"lmAddress\":\"" + lmAddress + '\"'
                 + ", \"logger\":\"" + logger + '\"'
-                + ", \"subsystem\":\"" + subsystem + '\"'
+                + ", \"subsystem\":\"" + distrSubsystem + "-" + distrVersion + ":" + distrBuildNumber+ '\"'
                 + ", \"subHost\":\"" + subHost + '\"'
                 + ", \"subAddress\":\"" + subAddress + '\"'
-                + ", \"createStamp\":\"" + createStamp + '\"'
+                + ", \"createStamp\":\"" + stamp + '\"'
                 + ", \"ex\":\"" + ex + '\"'
                 + ", \"message\":\"" + message + '\"'
                 + '}';
@@ -71,8 +74,8 @@ public class LogData implements Serializable, Comparable<LogData> {
 
     @Override
     public int compareTo(LogData other) {
-        LocalDateTime thisTime = this.getCreateStamp();
-        LocalDateTime otherTime = other.getCreateStamp();
+        LocalDateTime thisTime = this.getStamp();
+        LocalDateTime otherTime = other.getStamp();
         return thisTime.compareTo(otherTime);
     }
 

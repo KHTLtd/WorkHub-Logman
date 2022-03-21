@@ -35,10 +35,11 @@ build/
 ### Custom
 transaction-logs
 *.epoch
-*.log
 *.lck
 .mvn
 .github
 
 # logs
 /unsaved-logs/
+*.log
+*.zip

@@ -8,8 +8,8 @@ import com.workhub.logman.exceptions.PersistenceServiceException;
 import com.workhub.logman.handlers.logs.IUnsavedLogsHandler;
 import com.workhub.logman.handlers.logs.impl.UnsavedLogsHandler;
 import com.workhub.logman.persistence.IPersistenceService;
-import de.bytefish.pgbulkinsert.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.AsyncTaskExecutor;
@@ -57,16 +57,25 @@ public class PersistenceServiceImpl implements IPersistenceService, DisposableBe
         // Fill in the empty fields that are indexed
         logData.setLogId(UUID.randomUUID());
         logData.setInsertStamp(LocalDateTime.now());
-        if (StringUtils.isNullOrWhiteSpace(logData.getSubAddress())) {
+        logData.setLmHost(InetAddressUtil.getHostOrIp());
+        logData.setLmAddress(InetAddressUtil.getSERVER_IP());
+        if (StringUtils.isBlank(logData.getSubAddress())) {
             logData.setSubAddress(EMPTY_ENTRY);
         }
-        if (StringUtils.isNullOrWhiteSpace(logData.getSubsystem())) {
-            logData.setSubsystem(EMPTY_ENTRY);
-        }
-        if (StringUtils.isNullOrWhiteSpace(logData.getSubHost())) {
+        if (StringUtils.isBlank(logData.getSubHost())) {
             logData.setSubHost(EMPTY_ENTRY);
         }
-        logData.setLmHost(InetAddressUtil.getHostOrIp());
+        if (StringUtils.isBlank(logData.getLmHost())) {
+            logData.setLmHost(EMPTY_ENTRY);
+        }
+        if (StringUtils.isBlank(logData.getDistrSubsystem())) {
+            logData.setDistrSubsystem(EMPTY_ENTRY);
+        } else {
+            logData.setDistrSubsystem(
+                String.format("%s-%s:%s", logData.getDistrSubsystem(), logData.getDistrVersion(), logData.getDistrBuildNumber())
+            );
+        }
+
 
         queue.add(logData);
 

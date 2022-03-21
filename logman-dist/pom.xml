@@ -115,7 +115,7 @@
                     <useTestScope>true</useTestScope>
                     <useTestClasspath>true</useTestClasspath>
                     <httpConnector>
-                        <port>9090</port>
+                        <port>9080</port>
                     </httpConnector>
                     <webApp>
                         <jettyEnvXml>${project.basedir}/src/test/resources/jetty-env.xml</jettyEnvXml>
