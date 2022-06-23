@@ -49,7 +49,7 @@
         <commons.version>0.0.1-SNAPSHOT</commons.version>
         <checkstyle.doc.version>0.0.1</checkstyle.doc.version>
         <!-- 3rd PARTY LIBS VERSIONING -->
-        <spring.boot.version>2.6.0</spring.boot.version>
+        <spring.boot.version>2.6.6</spring.boot.version>
         <spring.kafka.version>2.8.0</spring.kafka.version>
         <cfx.version>5.2.2.Final</cfx.version>
     </properties>
